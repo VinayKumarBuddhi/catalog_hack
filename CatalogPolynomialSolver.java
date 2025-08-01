@@ -45,12 +45,8 @@ public class CatalogPolynomialSolver {
             }
 
             // Use Lagrange Interpolation to calculate f(0)
-            System.out.println("File: " + filename);
-            System.out.println("n = " + n + ", k = " + k + " (degree = " + (k-1) + ")");
-            System.out.println("Points used: " + xList.size());
-            
             BigInteger result = lagrangeInterpolationAtZero(xList, yList);
-            System.out.println("Constant term (C) = " + result);
+            System.out.println(result);
             
         } catch (Exception e) {
             System.err.println("Error processing " + filename + ": " + e.getMessage());
