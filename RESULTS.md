@@ -1,19 +1,20 @@
 # Polynomial Interpolation Results
 
-## Test Case 1
+## Program Usage
+The program now accepts JSON file paths as command line arguments for flexible input.
+
+## Sample Test Cases and Results
+
+### Test Case 1
 - **Input**: testcase1.json
 - **n**: 4, **k**: 3 (degree = 2)
 - **Points used**:
   - Point 1: x = 1, y = 4 (decoded from base 10: 4)
   - Point 2: x = 2, y = 7 (decoded from base 2: 111)
   - Point 3: x = 3, y = 12 (decoded from base 10: 12)
-- **Terms**:
-  - Term 1: 12
-  - Term 2: -21
-  - Term 3: 12
 - **Constant term (secret C)**: **3**
 
-## Test Case 2
+### Test Case 2
 - **Input**: testcase2.json
 - **n**: 10, **k**: 7 (degree = 6)
 - **Points used**:
@@ -24,14 +25,6 @@
   - Point 5: x = 5, y = 3711974121218449851 (decoded from base 8: 316034514573652620673)
   - Point 6: x = 6, y = 10788619898233492461 (decoded from base 3: 2122212201122002221120200210011020220200)
   - Point 7: x = 7, y = 26709394976508342463 (decoded from base 3: 20120221122211000100210021102001201112121)
-- **Terms**:
-  - Term 1: 6965595662210437
-  - Term 2: -449292612857894253
-  - Term 3: 6879727753136299845
-  - Term 4: -35577833134137908285
-  - Term 5: 77951456545587446871
-  - Term 6: -75520339287634447227
-  - Term 7: 26709394976508342463
 - **Constant term (secret C)**: **79836264049851**
 
 ## Summary
@@ -43,18 +36,32 @@
 - `testcase1.json` - First test case
 - `testcase2.json` - Second test case
 - `json-simple-1.1.1.jar` - JSON library
-- `run.bat` - Batch file to run with increased memory
-- `README.md` - Documentation
-- `package.json` - Project configuration
+- `RESULTS.md` - This results file
 
 ## How to Run
 ```bash
 # Compile
 javac -cp "json-simple-1.1.1.jar" CatalogPolynomialSolver.java
 
-# Run with increased memory
-java -Xmx2g -cp ".;json-simple-1.1.1.jar" CatalogPolynomialSolver
+# Run with specific test case file
+java -Xmx2g -cp ".;json-simple-1.1.1.jar" CatalogPolynomialSolver testcase1.json
+java -Xmx2g -cp ".;json-simple-1.1.1.jar" CatalogPolynomialSolver testcase2.json
 
-# Or use the batch file
-run.bat
-``` 
+# Run with any JSON file
+java -Xmx2g -cp ".;json-simple-1.1.1.jar" CatalogPolynomialSolver your_input_file.json
+```
+
+## Expected Output Format
+```
+File: testcase1.json
+n = 4, k = 3 (degree = 2)
+Points used: 3
+Constant term (C) = 3
+```
+
+## Features
+- ✅ **Command line input**: Accepts any JSON file path as argument
+- ✅ **High precision**: Uses BigDecimal with 100 decimal places for accuracy
+- ✅ **Flexible**: Works with any valid JSON input following the specified format
+- ✅ **Error handling**: Shows usage instructions if no file is provided
+- ✅ **Detailed output**: Shows file info, parameters, and final result 

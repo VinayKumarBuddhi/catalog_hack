@@ -45,8 +45,12 @@ public class CatalogPolynomialSolver {
             }
 
             // Use Lagrange Interpolation to calculate f(0)
+            System.out.println("File: " + filename);
+            System.out.println("n = " + n + ", k = " + k + " (degree = " + (k-1) + ")");
+            System.out.println("Points used: " + xList.size());
+            
             BigInteger result = lagrangeInterpolationAtZero(xList, yList);
-            System.out.println(result);
+            System.out.println("Constant term (C) = " + result);
             
         } catch (Exception e) {
             System.err.println("Error processing " + filename + ": " + e.getMessage());
@@ -68,10 +72,12 @@ public class CatalogPolynomialSolver {
             }
 
             java.math.BigDecimal yVal = new java.math.BigDecimal(y.get(i));
-            java.math.BigDecimal term = yVal.multiply(numerator).divide(denominator, 0, java.math.RoundingMode.HALF_UP);
+            // Use higher precision division with more decimal places
+            java.math.BigDecimal term = yVal.multiply(numerator).divide(denominator, 100, java.math.RoundingMode.HALF_UP);
             result = result.add(term);
         }
 
-        return result.toBigInteger();
+        // Round to nearest integer for final result
+        return result.setScale(0, java.math.RoundingMode.HALF_UP).toBigInteger();
     }
 }
